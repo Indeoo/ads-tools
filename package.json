@@ -1,0 +1,1 @@
+{"type":"module","dependencies":{"@cemalgnlts/mailjs":"^3.0.1","axios":"^1.6.5","clipboardy":"^3.0.0","ghost-cursor":"^1.2.0","puppeteer-core":"^20.8.0","yargs":"^17.7.2"}}
