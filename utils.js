@@ -33,7 +33,7 @@ export const XP_TABLE = {
   '2048': 15, //bonus 25
   'LuckyCat': 20, //bonus 20
   'UltiPilot': 20, //bonus 20
-  'Omnizone': 40, 
+  'Omnizone': 40,
   'Battlemon': 40, //bonus 40
   'PlayNouns': 40, //bonus 40
   'Unfettered': 20,
@@ -56,111 +56,123 @@ export const XP_TABLE = {
   'Micro3': 25,
   'ArenaGames': 15,
   'Imagine': 20,
-  'Q2048': 15
+  'Q2048': 15,
+  'PoHInstructions': 0,
+  'TrustaEgg': 10,
+  'Taskmaster': 0,
+  'WelcomeSZN': 10,
+  'Octomos': 20,
+  'CrazyGang': 20,
+  'Push': 20,
+  'Wizards': 20,
+  'Efrogs': 20,
+  'Voting1': 5,
+  'Satoshi_W2': 20,
+  'Linus': 20,
+  'Yooldo_W2': 20,
+  'FrogWars_W2': 20,
+  'ACG_W2': 20,
+  'Toad': 20,
+  'Voting2': 5,
+  'Ascend': 20,
+  'Send_W2': 20,
+  'Townstory_W2': 20,
+  'Danielle': 20,
+  'Demmortal': 20,
+  'Foxy': 20,
+  'Voting3': 5,
+  'Coop': 20,
+  'Borja': 20
 }
 
-/* export function writeToCSV(profileId, wallet, questName, setXP = null, totalXP) {
-  if(!(questName in XP_TABLE)) return;
-  let fileContent = '';
-  if(!totalXP) totalXP = 0;
-  if(fs.existsSync(filePath)) {
-    fileContent = fs.readFileSync(filePath, 'utf8');
-  } else {
-    // Если файл не существует, добавляем заголовок
-    fileContent = `ID;Wallet;Total XP;Welcome;SpaceFalcon;GamerBoom;Nidum;Galactic;Abyss;Snap;Ender;Satoshi;Yooldo;Dmail;Gamic;AsMatch;BitAvatar;ReadOn;Send;Music;Yuliverse;Sarubol;2048;LuckyCat;UltiPilot;Omnizone;Battlemon;PlayNouns;Unfettered;SocialScan;LineaPark;Macaw;Survive;Zace;Dexsport;FrogWar;ACG_WORLDS;AlienSwap\n`;
-  }
+export const ALIASES = {
+  'YODDLO': 'Yooldo',
+  'SEND_TO_CEX': 'Send',
+  'TOWNSTORY': 'Galactic',
+  'TOWNSTORY_BONUS': 'GalacticBonus',
+  'SATOSHI_UNIVERSE': 'Satoshi',
+  'ALIENSWAP_LINEA': 'AlienSwap',
+  'FROG_WAR': 'FrogWar',
+  'FROG_WAR_BONUS': 'FrogWarBonus',
+  'NOUNS': 'PlayNouns',
+  'ABBYSWORLD': 'Abyss',
+  'ARENA_GAMES': 'ArenaGames',
+  'GAMERBOOM_BONUS': 'GamerBoomBonus',
+  'SNAP_BONUS': 'SnapBonus',
+  'SOCIAL_SCAN': 'SocialScan',
+  'WRAPPING': 'Gamic',
+  'LINEA_CULTURE_2': 'CrazyGang',
+  'LINEA_CULTURE_3': 'Push',
+  'LINEA_CULTURE_4': 'Wizards',
+  'LINEA_CULTURE_5': 'Efrogs',
+  'LINEA_CULTURE_2_1': 'Satoshi_W2',
+  'LINEA_CULTURE_2_2': 'Linus',
+  'LINEA_CULTURE_2_3': 'Yooldo_W2',
+  'LINEA_CULTURE_2_4': 'FrogWars_W2',
+  'LINEA_CULTURE_2_5': 'ACG_W2',
+  'LINEA_CULTURE_2_6': 'Toad',
+  'LINEA_CULTURE_3_1': 'Ascend',
+  'LINEA_CULTURE_3_2': 'Send_W2',
+  'LINEA_CULTURE_3_3': 'Townstory_W2',
+  'LINEA_CULTURE_3_4': 'Danielle',
+  'LINEA_CULTURE_3_5': 'Demmortal',
+  'LINEA_CULTURE_3_6': 'Foxy',
+  'LINEA_CULTURE_4_1': 'Coop',
+  'LINEA_CULTURE_4_2': 'Borja'
+};
 
-  const lines = fileContent.split('\n');
-  let found = false;
-
-  // Разделяем заголовки и проверяем наличие questName
-  const header = lines[0].split(';');
-  if(!header.includes(questName)) {
-    // Если столбец не найден, добавляем его в заголовок
-    header.push(questName);
-    lines[0] = header.join(';');
-    // Добавляем пустое значение во все существующие строки
-    for (let i = 1; i < lines.length; i++) {
-      if (lines[i].trim()) {
-        lines[i] += ';';
-      }
-    }
-  }
-  
-  const walletIndex = header.indexOf('Wallet');
-  const columnIndex = header.indexOf(questName);
-
-  // Если setXP не указан, используем значение из XP_TABLE
-  if(setXP === null && XP_TABLE[questName] !== undefined) {
-    setXP = XP_TABLE[questName];
-  }
-
-  // Проверяем, есть ли уже строка с данным кошельком
-  for(let i = 1; i < lines.length; i++) {
-    const line = lines[i].split(';');
-    if(line[walletIndex] === wallet) {
-      // Если строка с кошельком найдена, обновляем значение в соответствующем столбце
-      const idIndex = header.indexOf('ID');
-      if(idIndex !== -1) {
-        line[idIndex] = profileId;
-      }
-      if(columnIndex !== -1) {
-        line[columnIndex] = setXP;
-      }
-      const totalXPIndex = header.indexOf('Total XP');
-      if(totalXPIndex !== -1) {
-        line[totalXPIndex] = totalXP;
-      }
-      lines[i] = line.join(';');
-      found = true;
-      break;
-    }
-  }
-
-  // Если строка с данным кошельком не найдена, добавляем новую строку
-  if(!found) {
-    const newData = new Array(header.length).fill('');
-    newData[header.indexOf('ID')] = profileId;
-    newData[walletIndex] = wallet;
-    if(columnIndex !== -1) {
-      newData[columnIndex] = setXP;
-    }
-    const totalXPIndex = header.indexOf('Total XP');
-    if(totalXPIndex !== -1) {
-      newData[totalXPIndex] = totalXP;
-    }
-    lines.push(newData.join(';'));
-  }
-
-  // Записываем изменения в файл
-  fs.writeFileSync(filePath, lines.join('\n').trim());
-}
-
-export function readFromCSV(profileId) {
-  let fileContent = '';
-  if (fs.existsSync(filePath)) {
-    fileContent = fs.readFileSync(filePath, 'utf8');
-  } else {
-    return 'File not found';
-  }
-
-  const lines = fileContent.split('\n');
-  const header = lines[0].split(';');
-  const profileIdIndex = header.indexOf('ID');
-
-  for (let i = 1; i < lines.length; i++) {
-    const line = lines[i].split(';');
-    if (line[profileIdIndex] === profileId) {
-      const result = {};
-      for (let j = 0; j < header.length; j++) {
-        result[header[j]] = line[j];
-      }
-      return result;
-    }
-  }
-
-  return 'Profile not found';
-} */
+export const NFTs = [
+  'SARUBOL',
+  'SNAP',
+  'BITAVATAR',
+  'SATOSHI_UNIVERSE',
+  'GAMERBOOM',
+  'YODDLO',
+  'ASMATCH',
+  'ABBYSWORLD',
+  'NIDUM',
+  'READON',
+  'LUCKYCAT',
+  'TOWNSTORY',
+  'OMNIZONE',
+  'BATTLEMON',
+  'NOUNS',
+  'SOCIAL_SCAN',
+  'LAYER_3_META',
+  'FROG_WAR',
+  'ZACE',
+  'ALIENSWAP_LINEA',
+  'ACG_WORLDS',
+  'BILINEAR',
+  'MICRO3',
+  'IMAGINE',
+  'ARENA_GAMES',
+  'GAMERBOOM_BONUS',
+  'SNAP_BONUS',
+  'NIDUM_BONUS',
+  'TOWNSTORY_BONUS',
+  'FROG_WAR_BONUS',
+  '2048',
+  'OCTOMOS',
+  'LINEA_CULTURE_2',
+  'LINEA_CULTURE_3',
+  'LINEA_CULTURE_4',
+  'LINEA_CULTURE_5',
+  'LINEA_CULTURE_2_1',
+  'LINEA_CULTURE_2_2',
+  'LINEA_CULTURE_2_3',
+  'LINEA_CULTURE_2_4',
+  'LINEA_CULTURE_2_5',
+  'LINEA_CULTURE_2_6',
+  'LINEA_CULTURE_3_1',
+  'LINEA_CULTURE_3_2',
+  'LINEA_CULTURE_3_3',
+  'LINEA_CULTURE_3_4',
+  'LINEA_CULTURE_3_5',
+  'LINEA_CULTURE_3_6',
+  'LINEA_CULTURE_4_1',
+  'LINEA_CULTURE_4_2'
+];
 
 export function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -169,7 +181,7 @@ export function getRandomInt(min, max) {
 }
 
 export function randomBetween(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min); 
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 export function getRandomElementFromSet(set) {
@@ -200,7 +212,7 @@ export function shuffleArray(array) {
 
 // Чтение содержимого директории
 
-export function getNewestProfilesFile() {
+function getNewestProfilesFile() {
   return new Promise((resolve, reject) => {
     fs.readdir('./', function (err, files) {
       if (err) {
@@ -281,69 +293,15 @@ export async function detectMetaMaskVersion(browser) {
     }
   });
 }
-// // Создание виртуального курсора и функции для его перемещения
-// await page.evaluate(() => {
-//     const cursor = document.createElement('div');
-//     cursor.id = 'virtual-cursor';
-//     cursor.style.width = '16px';
-//     cursor.style.height = '16px';
-//     cursor.style.borderRadius = '10px';
-//     cursor.style.backgroundColor = 'red';
-//     cursor.style.position = 'absolute';
-//     cursor.style.zIndex = '10000';
-//     cursor.style.pointerEvents = 'none'; // Чтобы курсор не блокировал клики
-//     document.body.appendChild(cursor);
 
-//     window.moveVirtualCursor = (x, y) => {
-//         cursor.style.left = `${x}px`;
-//         cursor.style.top = `${y}px`;
-//     };
-// });
+export async function getProfilesByKey(apiKey) {
+  try {
+    const res = await fetch(`https://smarthand.pro/php-scripts/linea.php?getProfiles=${apiKey}`, {
+      method: 'GET',
+    });
 
-// // Обновленная функция для плавного перемещения курсора с визуализацией
-// const moveCursor = async (page, stepsRange = { min: 24, max: 38 }, movements = 8) => {
-//     const rect = await page.evaluate(() => {
-//         return {
-//             width: document.documentElement.clientWidth,
-//             height: document.documentElement.clientHeight,
-//         };
-//     });
-
-//     let currentX = randomBetween(100, rect.width);
-//     let currentY = randomBetween(131, rect.height);
-
-//     for (let i = 0; i < movements; i++) {
-//         const x = randomBetween(0, rect.width);
-//         const y = randomBetween(0, rect.height);
-//         const steps = randomBetween(stepsRange.min, stepsRange.max);
-//         const delayBetweenMovements = randomBetween(100, 2650); // Задержка от 100 мс до 5 сек
-
-//         for (let step = 1; step <= steps; step++) {
-//             const stepX = (x - currentX) * step / steps + currentX;
-//             const stepY = (y - currentY) * step / steps + currentY;
-
-//             // Обновление виртуального и "реального" курсоров
-//             await page.mouse.move(stepX, stepY);
-//             await page.evaluate((x, y) => {
-//                 window.moveVirtualCursor(x, y);
-//             }, stepX, stepY);
-//             await new Promise(r => setTimeout(r, 1)); // Небольшая задержка для плавности
-
-//             if (step === steps) {
-//                 currentX = stepX;
-//                 currentY = stepY;
-//             }
-//         }
-
-//         // Добавляем рандомную задержку между перемещениями
-//         if (i < movements - 1) { // Проверяем, чтобы не ждать после последнего перемещения
-//             await new Promise(r => setTimeout(r, delayBetweenMovements));
-//         }
-//     }
-// };
-
-// // Плавное перемещение виртуального курсора по разным координатам на экране
-// await moveCursor(page);
-
-
-// return;
+    return await res.json();
+  } catch(err) {
+    return [];
+  }
+}
