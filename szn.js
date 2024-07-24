@@ -150,7 +150,7 @@ const questsData = {
   Foxy: { href: "/v2/quests/w3-foxy", quizBTNs: [] },
   Voting3: { href: "/v2/quests/week-3-voting", quizBTNs: ["a1", "a2", "a3", "a4", "a5", "3fa53bea-f175-4f74-aae9-ca2dda68d490"] },
   Coop: { href: "/v2/quests/w4-coop-records", quizBTNs: [] },
-  Borja: { href: "/v2/quests/w4-borja-moskv", quizBTNs: [] },
+  Fruit: { href: "/v2/quests/w4-forbidden-fruit", quizBTNs: [] },
 }
 
 //y - Count of reserved launches browsers
