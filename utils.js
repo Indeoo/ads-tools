@@ -84,7 +84,8 @@ export const XP_TABLE = {
   'Coop': 20,
   'Borja': 20,
   'Fruit': 20,
-  'FruitCrux': 20
+  'FruitCrux': 20,
+  'FruitStonez': 20
 }
 
 export const ALIASES = {
@@ -122,7 +123,8 @@ export const ALIASES = {
   'LINEA_CULTURE_4_1': 'Coop',
   'LINEA_CULTURE_4_2': 'Borja',
   'LINEA_CULTURE_4_3': 'Fruit',
-  'LINEA_CULTURE_4_4': 'FruitCrux'
+  'LINEA_CULTURE_4_4': 'FruitCrux',
+  'LINEA_CULTURE_4_5': 'FruitStonez'
 };
 
 export const NFTs = [
@@ -177,7 +179,8 @@ export const NFTs = [
   'LINEA_CULTURE_4_1',
   'LINEA_CULTURE_4_2',
   'LINEA_CULTURE_4_3',
-  'LINEA_CULTURE_4_4'
+  'LINEA_CULTURE_4_4',
+  'LINEA_CULTURE_4_5'
 ];
 
 export function getRandomInt(min, max) {

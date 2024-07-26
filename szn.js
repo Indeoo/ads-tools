@@ -152,6 +152,7 @@ const questsData = {
   Coop: { href: "/v2/quests/w4-coop-records", quizBTNs: [] },
   Fruit: { href: "/v2/quests/w4-forbidden-fruit", quizBTNs: [] },
   FruitCrux: { href: "/v2/quests/w4-forbidden-fruit-crux", quizBTNs: [] },
+  FruitStonez: { href: "/v2/quests/w4-forbidden-fruit-stonez-the-organic", quizBTNs: [] },
 }
 
 //y - Count of reserved launches browsers
@@ -1748,7 +1749,7 @@ async function puppeteerRun(profile, profileUniqueId) {
       const signInButtonSelector = '.flex.items-center.tablet\\:gap-md .bg-v2-blue-base.text-v2-content-primary';
       let signInButtonText = await logTextFromElement(lineaSZNPage, signInButtonSelector);
 
-      if(signInButtonText === 'Connect Wallet') {
+      if(signInButtonText === 'Connect Wallet' || signInButtonText === 'Sign in') {
         signInButtonText = null;
         const signInBtnSelector = signInButtonSelector;
         await signInLayer3(_profile, signInBtnSelector);
@@ -1757,7 +1758,7 @@ async function puppeteerRun(profile, profileUniqueId) {
 
       //Пока временно добавил, потому что бывало не залогинило у Ромы и продолжало кайфовать по сайту
       signInButtonText = await logTextFromElement(lineaSZNPage, signInButtonSelector);
-      if(signInButtonText === 'Connect Wallet') {
+      if(signInButtonText === 'Connect Wallet' || signInButtonText === 'Sign in') {
         _profile.log('Not logged in!')
         return;
       }
