@@ -153,6 +153,7 @@ const questsData = {
   Fruit: { href: "/v2/quests/w4-forbidden-fruit", quizBTNs: [] },
   FruitCrux: { href: "/v2/quests/w4-forbidden-fruit-crux", quizBTNs: [] },
   FruitStonez: { href: "/v2/quests/w4-forbidden-fruit-stonez-the-organic", quizBTNs: [] },
+  Laurent: { href: "/v2/quests/w4-adelaide-laurent-bellue", quizBTNs: [] },
 }
 
 //y - Count of reserved launches browsers
