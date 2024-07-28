@@ -267,14 +267,14 @@ const runProfilesSequentially = async(profiles, log = true) => {
   let checkLeftProfiles = false;
   for(const profile of _profiles) {
     uniqueId++;
-    const isGood = await checkAchievedQuests(profile);
-    if(!isGood) {
-      console.log(`P${profile}(${uniqueId}) Achieved all quests!`)
-      // countProfiles--;
-      processedProfiles.add(profile)
-      checkLeftProfiles = true;
-      continue;
-    }
+//    const isGood = await checkAchievedQuests(profile);
+//    if(!isGood) {
+//      console.log(`P${profile}(${uniqueId}) Achieved all quests!`)
+//      // countProfiles--;
+//      processedProfiles.add(profile)
+//      checkLeftProfiles = true;
+//      continue;
+//    }
 
     puppeteerRunInWorker(profile, uniqueId);
     await delay(randomBetween(DELAY_BROWSER[0], DELAY_BROWSER[1])); // задержка между запусками
@@ -1120,7 +1120,8 @@ async function puppeteerRun(profile, profileUniqueId) {
       }
 
       try {
-        const claim2XPath = "/html/body/div[7]/div/div/div/div[1]/button"
+        //const claim2XPath = "/html/body/div[7]/div/div/div/div[1]/button"
+        const claim2XPath = "/html/body/div[9]/div/div/div/div[1]/button"
         await clickElementsByXPath(_profile.SZNPage, claim2XPath)
       } catch(err) {
         console.log("Probably claim 2 button pressed")
