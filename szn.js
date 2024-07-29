@@ -154,6 +154,7 @@ const questsData = {
   FruitCrux: { href: "/v2/quests/w4-forbidden-fruit-crux", quizBTNs: [] },
   FruitStonez: { href: "/v2/quests/w4-forbidden-fruit-stonez-the-organic", quizBTNs: [] },
   Laurent: { href: "/v2/quests/w4-adelaide-laurent-bellue", quizBTNs: [] },
+  Voting4: { href: "/v2/quests/week-4-voting", quizBTNs: ["a1", "a2", "a3", "a4", "a5", "3fa53bea-f175-4f74-aae9-ca2dda68d490"] },
 }
 
 //y - Count of reserved launches browsers

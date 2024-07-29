@@ -86,7 +86,8 @@ export const XP_TABLE = {
   'Fruit': 20,
   'FruitCrux': 20,
   'FruitStonez': 20,
-  'Laurent': 20
+  'Laurent': 20,
+  'Voting4': 5
 }
 
 export const ALIASES = {
