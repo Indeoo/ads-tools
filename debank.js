@@ -224,6 +224,10 @@ class Profile {
     goToDebank() {
         return this.SZNPage.goto('https://debank.com/xp', {timeout: 60e3, waitUntil: 'load'});
     }
+
+    goToL0Badge() {
+        return this.SZNPage.goto('https://debank.com/badge/53', {timeout: 60e3, waitUntil: 'load'});
+    }
 }
 
 const puppeteerRunInWorker = async (profile, profileUniqueId) => {
@@ -946,6 +950,10 @@ async function execute_quest(selected_quest, _profile) {
         }
     } else if (selected_quest === 'zro_badge') {
         console.log("ZRO BADGE")
+        _profile.goToL0Badge()
+        let selector = "#root > div.DesktopFrame_container__v\\+d3Z > div.DesktopFrame_main__owMKN > div > div:nth-child(2) > div.BadgeDetailHeader_container__hbpNd > div > div.BadgeDetailHeader_right__gNqzC > div:nth-child(1) > div.MintBadgeButton_mintBtnWrap__7bL45 > div.MintBadgeButton_mintable__aaVg2"
+        _profile.click(selector, "log")
+        // MINT XPATH //*[@id="root"]/div[1]/div[1]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[1]
     } else {
         console.log("ERROR")
     }
