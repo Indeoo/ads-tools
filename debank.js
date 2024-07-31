@@ -919,6 +919,38 @@ async function signInDebank(_profile, signInBtnSelector) {
     }
 }
 
+async function execute_quest(selected_quest, _profile) {
+    if (selected_quest === 'init') {
+        console.log("INIT DEBANK CLAIM")
+        try {
+            const closeXPath = "/html/body/div[5]/div/div/div/div[2]/img"
+            await clickElementsByXPath(_profile.SZNPage, closeXPath)
+        } catch (err) {
+            console.log("Probably close button pressed")
+            console.log(err)
+        }
+        try {
+            const claimXPath = "/html/body/div[1]/div[1]/div[1]/div/div[4]/div[1]/button"
+            await clickElementsByXPath(_profile.SZNPage, claimXPath)
+        } catch (err) {
+            console.log("Probably claim 1 button pressed")
+            console.log(err)
+        }
+
+        try {
+            const claim2XPath = "/html/body/div[9]/div/div/div/div[1]/button"
+            await clickElementsByXPath(_profile.SZNPage, claim2XPath)
+        } catch (err) {
+            console.log("Probably claim 2 button pressed")
+            console.log(err)
+        }
+    } else if (selected_quest === 'zro_badge') {
+        console.log("ZRO BADGE")
+    } else {
+        console.log("ERROR")
+    }
+}
+
 async function puppeteerRun(profile, profileUniqueId) {
     running++;
     // await delay(2222e3)
@@ -1139,37 +1171,11 @@ async function puppeteerRun(profile, profileUniqueId) {
                 console.log(err)
             }
 
-            let SELECTED_QUESTS = argv.q;
-
-            if (SELECTED_QUESTS === 'init') {
-                console.log("INIT DEBANK CLAIM")
-                try {
-                    const closeXPath = "/html/body/div[5]/div/div/div/div[2]/img"
-                    await clickElementsByXPath(_profile.SZNPage, closeXPath)
-                } catch (err) {
-                    console.log("Probably close button pressed")
-                    console.log(err)
+            SELECTED_QUESTS.forEach(selected_quest => {
+                console.log(`EXECUTE ${selected_quest}`)
+                execute_quest(selected_quest, _profile)
                 }
-                try {
-                    const claimXPath = "/html/body/div[1]/div[1]/div[1]/div/div[4]/div[1]/button"
-                    await clickElementsByXPath(_profile.SZNPage, claimXPath)
-                } catch (err) {
-                    console.log("Probably claim 1 button pressed")
-                    console.log(err)
-                }
-
-                try {
-                    const claim2XPath = "/html/body/div[9]/div/div/div/div[1]/button"
-                    await clickElementsByXPath(_profile.SZNPage, claim2XPath)
-                } catch (err) {
-                    console.log("Probably claim 2 button pressed")
-                    console.log(err)
-                }
-            } else if (SELECTED_QUESTS === 'zro_badge') {
-              console.log("ZRO BADGE")
-            } else {
-              console.log("ERROR")
-            }
+            )
 
             _profile.loggedIn = 1;
 
