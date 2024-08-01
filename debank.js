@@ -878,46 +878,6 @@ async function signInDebank(_profile, signInBtnSelector) {
         }
         console.log(extensionTarget)
         await delay(10000)
-//
-//    try {
-//      // await lineaSZNPage.waitForSelector('#toaster-portal > div.fixed.left-1\\/2.top-1\\/2.flex.-translate-x-1\\/2.-translate-y-1\\/2.flex-col.items-center.justify-center > div > button', {timeout: 3e3}); //Continue button on captcha page
-//      const selector = 'div[role="dialog"]';
-//      await _profile.SZNPage.waitForSelector(selector, {timeout: 3e3});
-//      const checkInterval = 100; // Интервал проверки в миллисекундах
-//      const timeout = 30000; // Максимальное время ожидания в миллисекундах
-//
-//      const start = Date.now();
-//      let elementExists = true;
-//
-//      while(elementExists && (Date.now() - start) < timeout) {
-//        elementExists = await page.evaluate(selector => {
-//          return !!document.querySelector(selector);
-//        }, selector);
-//
-//        if(elementExists) {
-//          await new Promise(resolve => setTimeout(resolve, checkInterval));
-//        }
-//      }
-//
-//      if(!elementExists) {
-//        _profile.log('Element has disappeared, continuing execution.');
-//      } else {
-//        _profile.logError('Element did not disappear within the timeout period.');
-//      }
-//      // interval every 5 seconds
-//      // await waitAndClickDisabledButton(lineaSZNPage, '#toaster-portal > div.fixed.left-1\\/2.top-1\\/2.flex.-translate-x-1\\/2.-translate-y-1\\/2.flex-col.items-center.justify-center > div > button', profile);
-//    } catch (error) {
-//      const errString = error.toString();
-//      if(errString.includes("TimeoutError: Waiting for selector")) {
-//        _profile.log('No captcha, we are lucky')
-//      } else {
-//        _profile.log(error)
-//      }
-//    }
-//
-//    // await delay(randomBetween(5e3, 8e3))
-//    await delay(randomBetween(1e3, 2e3))
-//    await _profile.SZNPage.reload();
     } else {
         _profile.log(`No extension target, close browser`);
     }
@@ -950,12 +910,25 @@ async function execute_quest(selected_quest, _profile) {
         }
     } else if (selected_quest === 'zro_badge') {
         console.log("ZRO BADGE")
-        _profile.goToL0Badge()
-        let selector = "#root > div.DesktopFrame_container__v\\+d3Z > div.DesktopFrame_main__owMKN > div > div:nth-child(2) > div.BadgeDetailHeader_container__hbpNd > div > div.BadgeDetailHeader_right__gNqzC > div:nth-child(1) > div.MintBadgeButton_mintBtnWrap__7bL45 > div.MintBadgeButton_mintable__aaVg2"
-        _profile.click(selector, "log")
+        await _profile.goToL0Badge()
+        await _profile.SZNPage.waitForTimeout(2e3)
+        //let selector = "#root > div.DesktopFrame_container__v\\+d3Z > div.DesktopFrame_main__owMKN > div > div:nth-child(2) > div.BadgeDetailHeader_container__hbpNd > div > div.BadgeDetailHeader_right__gNqzC > div:nth-child(1) > div.MintBadgeButton_mintBtnWrap__7bL45 > div.MintBadgeButton_mintable__aaVg2"
+        let xPath = "//*[@id=\"root\"]/div[1]/div[1]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]"
+        console.log("WAIT SELECTOR")
+        await _profile.SZNPage.waitForXPath(xPath)
+        console.log("CLICK")
+        await clickElementsByXPath(_profile.SZNPage, xPath)
+        //await _profile.click(selector, "log")
         // MINT XPATH //*[@id="root"]/div[1]/div[1]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[1]
     } else {
         console.log("ERROR")
+    }
+}
+
+async function processQuests(_profile) {
+    for (const selected_quest of SELECTED_QUESTS) {
+        console.log(`EXECUTE ${selected_quest}`);
+        await execute_quest(selected_quest, _profile);
     }
 }
 
@@ -983,7 +956,6 @@ async function puppeteerRun(profile, profileUniqueId) {
         }
 
         try {
-            //const wsEndpointUrl = `ws://127.0.0.1:9222/devtools/browser/30d09e6f-8c56-4d70-ab63-c56cf47b68c2`;
             browser = await puppeteer.connect({
                 browserWSEndpoint: wsEndpointUrl,
                 defaultViewport: null,
@@ -1132,33 +1104,12 @@ async function puppeteerRun(profile, profileUniqueId) {
                 return;
             }
 
-            const clickElementXPath = async (page, xpath) => {
-                // Wait for the element to appear in the DOM
-                const [element] = await page.$x(xpath);
-
-                if (element) {
-                    // Click the element
-                    await element.click();
-                    return 'Элемент успешно нажат.';
-                } else {
-                    return 'Элемент не найден.';
-                }
-            };
-
             let signInXpath = '//*[@id="root"]/div[1]/div[1]/div/div/div/div[1]/div/button'
             try {
                 await lineaSZNPage.waitForXPath(signInXpath, {timeout: 70e3})
                 const signInButtonSelector = (signInXpath);
                 let signInButtonText = await logTextFromElementXPath(lineaSZNPage, signInButtonSelector);
 
-                //const logInResult = await clickElementXPath(lineaSZNPage, signInXpath);
-
-//      let MMXpath = 'div > div > div.modal-content.svelte-18y99pm > div.body.svelte-veh8pn > div.sidebar.svelte-veh8pn > div > div > div.ready-wallet-container.svelte-1rpkvp7 > button > span'
-//      await lineaSZNPage.waitForXPath(MMXpath, {timeout: 70e3})
-//      const MMButtonSelector = (MMXpath);
-//      let MMButtonText = await logTextFromElementXPath(lineaSZNPage, MMButtonSelector);
-//
-//      const mmResult = await clickElementXPath(lineaSZNPage, signInXpath);
                 console.log(signInButtonText)
 
                 if (signInButtonText === 'Log in to Start') {
@@ -1178,12 +1129,7 @@ async function puppeteerRun(profile, profileUniqueId) {
                 console.log("Probably logged in")
                 console.log(err)
             }
-
-            SELECTED_QUESTS.forEach(selected_quest => {
-                console.log(`EXECUTE ${selected_quest}`)
-                execute_quest(selected_quest, _profile)
-                }
-            )
+            await processQuests(_profile);
 
             _profile.loggedIn = 1;
 
