@@ -155,7 +155,7 @@ const questsData = {
     FruitStonez: { href: "/v2/quests/w4-forbidden-fruit-stonez-the-organic", quizBTNs: [] },
     Laurent: { href: "/v2/quests/w4-adelaide-laurent-bellue", quizBTNs: [] },
     Voting4: { href: "/v2/quests/week-4-voting", quizBTNs: ["a1", "a2", "a3", "a4", "a5", "3fa53bea-f175-4f74-aae9-ca2dda68d490"] },
-    Voting5: { href: "/v2/quests/week-5-voting", quizBTNs: ["a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9", "a10", "a11", "a12", "a13", "a14", "a15", "a16", "a17", "a18", "a19", "3fa53bea-f175-4f74-aae9-ca2dda68d490"]},
+    Voting5: { href: "/v2/quests/week-5-voting", quizBTNs: ["aba6260f-c63b-4135-8dad-d18e59493cc4", "454b9f84-ab2f-4dd8-8d8f-e5d26da577f8", "c9af96e5-e923-46ba-8ea3-c68d6a39a48c", "62909cdc-aa91-45fc-819a-3ac2b3b27200", "d926cc59-6861-4a6c-a0f8-4fe7e8ffcae0", "dcbddd6c-7315-47b6-8881-bafa58ffe4c0", "3ab3a918-6ce6-496c-9c26-a662ca9c8536", "1eace89f-5cc8-409b-899a-737f68074edd", "f3727b1c-a2c1-415c-9593-ce4876af5112", "bf52c14c-2c2d-4d87-a187-5a89441cb398", "71deb858-174e-4f2f-b37a-297b84826867", "62e22d3c-c08c-4afe-a77e-e7faa29ad9d8", "77539368-4e58-48f0-94eb-154ac49f05c1", "f8ff90bc-48f1-4793-9f42-ff3204ba33bd", "bd148ea2-05f2-4619-817f-2021e89ba19a", "3c646586-9ff9-4586-8c34-2d67e68e273f", "60f9efa5-cc58-41d7-8f0d-e6284adc8e1f", "706f84c5-101b-4262-b885-3d51af2c3b25", "3fa53bea-f175-4f74-aae9-ca2dda68d490"]},
 }
 
 //y - Count of reserved launches browsers
