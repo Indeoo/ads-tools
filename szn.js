@@ -155,7 +155,7 @@ const questsData = {
     FruitStonez: { href: "/v2/quests/w4-forbidden-fruit-stonez-the-organic", quizBTNs: [] },
     Laurent: { href: "/v2/quests/w4-adelaide-laurent-bellue", quizBTNs: [] },
     Voting4: { href: "/v2/quests/week-4-voting", quizBTNs: ["a1", "a2", "a3", "a4", "a5", "3fa53bea-f175-4f74-aae9-ca2dda68d490"] },
-    Voting5: { href: "/v2/quests/week-5-voting", quizBTNs: ["a1", "a2", "a3", "a4", "a5", "3fa53bea-f175-4f74-aae9-ca2dda68d490"] },
+    Voting5: { href: "/v2/quests/week-5-voting", quizBTNs: ["a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9", "a10", "a11", "a12", "a13", "a14", "a15", "a16", "a17", "a18", "a19", "3fa53bea-f175-4f74-aae9-ca2dda68d490"]},
 }
 
 //y - Count of reserved launches browsers
